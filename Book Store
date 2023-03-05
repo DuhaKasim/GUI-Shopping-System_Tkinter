@@ -1,0 +1,195 @@
+from tkinter import *
+
+from tkinter import ttk
+
+root = Tk()
+
+root.title('Book Store')
+
+root.geometry("900x700+350+250")
+
+Books=[]
+Prices=[]
+basket_count =  IntVar(root, value=0)
+
+def add(element):
+    Books.append(element[0])
+    Prices.append(element[1])
+    basket_count.set(basket_count.get()+1) #increase basket value by 1
+    print(Books)
+    print(Prices)
+    
+sv = StringVar()
+
+def basket_text():
+    t = ''
+    counter = 1
+    total = 0
+    for i in range(len(Books)):
+        t = t +f"{counter} - {Books[i]:20s} £{Prices[i]:4.1f} \n"
+        counter +=1
+        total = total + Prices[i]
+    total = f"\n\n TOTAL:\t £{total:4.1f} \n"
+    sv.set(t+str(total))
+
+    if sv.get() == '':
+        sv.set('The basket is empty')
+          
+                         
+
+# this is a function desplaying new window on your show_basket button 
+def show_basket_content():
+    # Create widget
+    top1 = Toplevel(root)
+    # Define title for window
+    top1.title("Shopping Basket")
+    # specify size
+    top1.geometry("300x500")
+
+    # Create label
+    basket_text()
+    basket_label = Label(window1, textvariable = sv)
+    basket_label.pack()
+
+    #Create shopping discount label
+    top1.title('Shopping code')
+    label = Label(top1, text= "Enter code:")
+    label.pack(side= LEFT, padx=5 , pady=55)
+    
+    e = StringVar()
+    entry = Entry(top1, width=30, textvariable = e)
+    entry.pack(side= LEFT) 
+    
+
+    # Create Exit button
+    button1 = Button(top1, text="Exit", command=top1.destroy)
+    button1.pack(anchor = "w", side= "bottom")
+
+    # Display until closed manually
+    top1.mainloop()
+
+
+# Basket label-----------------------------------------------------------------------------------
+basket1 = LabelFrame(master = root, relief = RAISED, borderwidth = 3)
+basket1.grid(row=0, column=1, padx =5, pady=5)
+basket_count_label = Label(master = basket1, textvariable = basket_count)
+basket_count_label.pack()
+
+# main frame --- all frames are attached to this frame
+window_frame = LabelFrame(master=root, borderwidth=6, bg='#ADD8E6', width=400)
+window_frame.pack()
+
+
+
+# Welcome frame ----------------------------------------------------------------------------------
+top_frame = LabelFrame(master=window_frame, borderwidth=3, bg='#ADD8E6', width=400)
+top_frame.pack()
+# welcome label attached to welcome frame
+welcome_label = Label(master=top_frame, text = 'WELCOME TO MY BOOKSTORE', bg= 'white', width=400)
+welcome_label.pack(padx=20, pady=20)
+# -------------------------------------------------------------------------------------------------
+
+
+# Items Frame ------------------------------------------------------------------------------------------
+middle_frame = LabelFrame(master=window_frame, borderwidth=3, bg='white', width=400)
+middle_frame.pack()
+
+
+
+# Items 1 ------------------------------------------------------------------------------------------
+frame_item1 = LabelFrame(master=middle_frame, text = 'ITEM', width=80, borderwidth=5, relief=RAISED)
+frame_item1.grid(row=0, column=0, padx=5, pady=5)   #   only the frames of each items are attached ad greed
+
+label_item1 = Label(master=frame_item1, text='IT ENDS WITH US')
+label_item1.pack()
+
+label_item1_price = Label(master=frame_item1, text='£ 6.78')
+label_item1_price.pack()
+
+button_item1 = Button(master=frame_item1, text='BUY')
+button_item1.pack()
+# ----------------------------------------------------------------------------------------------------
+
+
+
+# Items 2 ------------------------------------------------------------------------------------------
+frame_item2 = LabelFrame(master=middle_frame, text = 'ITEM', width=80, borderwidth=5, relief=RAISED)
+frame_item2.grid(row=0, column=1, padx=5, pady=5)   #   only the frames of each items are attached 
+
+label_item2 = Label(master=frame_item2, text='IT STARTS WITH US')
+label_item2.pack()
+
+label_item2_price = Label(master=frame_item2, text='£ 8.69')
+label_item2_price.pack()
+
+button_item2 = Button(master=frame_item2, text='BUY', command=lambada: add(label_item1))
+button_item2.pack()
+# ----------------------------------------------------------------------------------------------------
+
+# Items 3 ------------------------------------------------------------------------------------------
+frame_item3 = LabelFrame(master=middle_frame, text = 'ITEM', width=80, borderwidth=5, relief=RAISED)
+frame_item3.grid(row=1, column=0, padx=5, pady=5)   #   only the frames of each items are attached 
+
+label_item3 = Label(master=frame_item3, text='HARY POTTER AND\n THE PHILOSOPHERS STONE')
+label_item3.pack()
+
+label_item3_price = Label(master=frame_item3, text='£ 4.80')
+label_item3_price.pack()
+
+button_item3 = Button(master=frame_item3, text='BUY')
+button_item3.pack()
+# ----------------------------------------------------------------------------------------------------
+
+# Items 4 ------------------------------------------------------------------------------------------
+frame_item4 = LabelFrame(master=middle_frame, text = 'ITEM', width=80, borderwidth=5, relief=RAISED)
+frame_item4.grid(row=1, column=1, padx=5, pady=5)   #   only the frames of each items are attached 
+
+label_item4 = Label(master=frame_item4, text='HARY POTTER AND\n THE CHAMBER OF SECRETS')
+label_item4.pack()
+
+label_item4_price = Label(master=frame_item4, text='£ 5.80')
+label_item4_price.pack()
+
+button_item4 = Button(master=frame_item4, text='BUY')
+button_item4.pack()
+# ----------------------------------------------------------------------------------------------------
+
+# Items 5 ------------------------------------------------------------------------------------------
+frame_item5 = LabelFrame(master=middle_frame, text = 'ITEM', width=80, borderwidth=5, relief=RAISED)
+frame_item5.grid(row=0, column=2, padx=5, pady=5)   #   only the frames of each items are attached 
+
+label_item5 = Label(master=frame_item5, text='RICH DAD POOR DAD')
+label_item5.pack()
+
+label_item5_price = Label(master=frame_item5, text='£ 8.10')
+label_item5_price.pack()
+
+button_item5 = Button(master=frame_item5, text='BUY')
+button_item5.pack()
+# ----------------------------------------------------------------------------------------------------
+
+# Items 6 ------------------------------------------------------------------------------------------
+frame_item6 = LabelFrame(master=middle_frame, text = 'ITEM', width=80, borderwidth=5, relief=RAISED)
+frame_item6.grid(row=1, column=2, padx=5, pady=5)   #   only the frames of each items are attached 
+
+label_item6 = Label(master=frame_item6, text='REBEL HEART')
+label_item6.pack()
+
+label_item6_price = Label(master=frame_item6, text='£ 5.60')
+label_item6_price.pack()
+
+button_item6 = Button(master=frame_item6, text='BUY', command= add)
+button_item6.pack()
+# ----------------------------------------------------------------------------------------------------
+
+
+# BOTTOM Frame ------------------------------------------------------------------------------------------
+bottom_frame = LabelFrame(master=window_frame, borderwidth=3, bg='white', width=400, text= 'Shopping basket')
+bottom_frame.pack()
+
+show_basket = Button(master=bottom_frame, text='View basket', command=show_basket_content)
+show_basket.pack()
+
+
+root.mainloop()
+
